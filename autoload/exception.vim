@@ -93,6 +93,10 @@ function! s:locate_function(functionname, line) abort
 endfunction
 
 function! exception#make_quickfix(...) abort
+  if a:0 == 0 && !exists('s:last')
+    echomsg 'no previous Exception'
+    return
+  endif
   let errors = call('exception#info', a:000)
   let rv = []
   for error in (errors)
