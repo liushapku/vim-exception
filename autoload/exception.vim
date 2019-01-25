@@ -127,6 +127,9 @@ endfunction
 
 " optional: the traceback info. default: last traceback
 function! exception#quickfix(...) abort
+  if !exists('s:last')
+    return
+  endif
   let qf = call('exception#make_quickfix', a:000)
   silent call setqflist(qf)
   silent botright copen
